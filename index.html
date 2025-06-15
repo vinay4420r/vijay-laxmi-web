@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaGuru | Professional Online Tutoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #42f587;
+            --secondary: #2e8b57;
+            --accent: #42a5f5;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #facc15;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f0fff0 0%, #e0f7ff 100%);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(66, 245, 135, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #2e8b57;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(66, 245, 135, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-light {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-light:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+        
+        /* Language Toggle Button */
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(66, 245, 135, 0.1);
+            border-radius: 30px;
+            padding: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+            height: 40px;
+        }
+        
+        .language-option {
+            padding: 6px 15px;
+            border-radius: 20px;
+            z-index: 2;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            font-size: 0.95rem;
+        }
+        
+        .language-option.active {
+            color: white;
+        }
+        
+        .language-slider {
+            position: absolute;
+            height: 34px;
+            border-radius: 20px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .en-active .language-slider {
+            left: 3px;
+            width: calc(50% - 6px);
+        }
+        
+        .te-active .language-slider {
+            left: calc(50% + 3px);
+            width: calc(50% - 6px);
+        }
+        
+        .mobile-language-toggle .language-toggle {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-language-toggle {
+            margin-left: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #e0ffe8 0%, #f0fff8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(66, 245, 135, 0.1) 0%, rgba(66, 165, 245, 0.1) 100%);
+            top: -300px;
+            right: -200px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+            padding-right: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            color: #777;
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #f0fff8 0%, #e0ffe8 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .service-icon {
+            background: var(--primary);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .service-content p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .services-btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            border: 2px solid rgba(66, 245, 135, 0.2);
+        }
+
+        .testimonial-card::before {
+            content: " ";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(66, 245, 135, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            margin-bottom: 20px;
+            color: #555;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--primary);
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .testimonials-btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #e0ffe8 0%, #f0fff8 100%);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--secondary);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(66, 245, 135, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .contact-text p, .contact-text a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+
+        .contact-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(66, 245, 135, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 70px 0 30px;
+            transition: var(--transition);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+                max-width: 100%;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                background: white;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.4s ease;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            /* Mobile language toggle positioning */
+            .mobile-language-toggle {
+                position: absolute;
+                top: 20px;
+                right: 70px;
+                z-index: 1001;
+            }
+            
+            .desktop-language-toggle {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-language-toggle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+                font-size: 0.95rem;
+            }
+            
+            .mobile-language-toggle {
+                right: 60px;
+            }
+            
+            .language-option {
+                font-size: 0.9rem;
+                padding: 5px 12px;
+                min-width: 50px;
+            }
+            
+            .language-slider {
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Vidya<span>Guru</span></a>
+                
+                <!-- Mobile Language Toggle -->
+                <div class="mobile-language-toggle">
+                    <div class="language-toggle en-active">
+                        <div class="language-option active" data-lang="en">English</div>
+                        <div class="language-option" data-lang="te">తెలుగు</div>
+                        <div class="language-slider"></div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links">
+                    <li><a href="home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="about-us.html" data-i18n="nav.about">About</a></li>
+                    <li><a href="services.html" data-i18n="nav.services">Services</a></li>
+                    <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonials</a></li>
+                    <li><a href="contact-us.html" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <div class="desktop-language-toggle">
+                            <div class="language-toggle en-active">
+                                <div class="language-option active" data-lang="en">English</div>
+                                <div class="language-option" data-lang="te">తెలుగు</div>
+                                <div class="language-slider"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 data-i18n="hero.title">Transform Your Learning Experience With Expert Online Tutoring</h1>
+                    <p data-i18n="hero.subtitle">Personalized 1-on-1 tutoring sessions designed to help you achieve academic excellence. Join students from around the world who have improved their grades and confidence.</p>
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.cta1">Book a Free Session</a>
+                    <a href="#services" class="btn btn-secondary" data-i18n="hero.cta2">Explore Subjects</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Online Tutoring">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.title">About Me</h2>
+                <p data-i18n="about.subtitle">Learn about my teaching philosophy, qualifications, and experience</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Tutor Profile">
+                </div>
+                <div class="about-text">
+                    <h2 data-i18n="about.heading">Professional Tutor with 8+ Years Experience</h2>
+                    <p data-i18n="about.text1">Hello! I'm Rajesh Kumar, a passionate educator with a Master's degree in Education and extensive experience in online teaching. I specialize in making complex concepts simple and enjoyable to learn.</p>
+                    <p data-i18n="about.text2">My teaching approach focuses on building strong foundational knowledge, developing critical thinking skills, and creating personalized learning plans for each student's unique needs and goals.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p data-i18n="about.stat1">Students Taught</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>98%</h3>
+                            <p data-i18n="about.stat2">Satisfaction Rate</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>15+</h3>
+                            <p data-i18n="about.stat3">Subjects Covered</p>
+                        </div>
+                    </div>
+                            <div class="services-btn-container">
+                <a href="#contact" class="btn btn-primary" data-i18n="about.cta">Know More About    Me</a>
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="services.title">Our Tutoring Services</h2>
+                <p data-i18n="services.subtitle">Comprehensive learning solutions tailored to your academic needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.motivational.title">Motivational Classes</h3>
+                        <p data-i18n="services.motivational.desc">Inspirational sessions to boost confidence, overcome challenges, and develop a growth mindset for academic and personal success.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.english.title">Spoken English</h3>
+                        <p data-i18n="services.english.desc">Improve pronunciation, fluency, and conversational skills through interactive sessions designed for real-world communication.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.html.title">HTML & CSS</h3>
+                        <p data-i18n="services.html.desc">Master the fundamentals of web development with hands-on projects and practical exercises to build beautiful, responsive websites.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.interview.title">Interview Training</h3>
+                        <p data-i18n="services.interview.desc">Prepare for job interviews with mock sessions, common questions, and strategies to showcase your skills and experience effectively.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.computer.title">Computer Skills</h3>
+                        <p data-i18n="services.computer.desc">Learn essential computer skills from basic operations to advanced software applications for personal and professional growth.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 data-i18n="services.tech.title">Tech Skills</h3>
+                        <p data-i18n="services.tech.desc">Develop in-demand technical skills including programming, data analysis, and digital literacy for the modern workplace.</p>
+                        <a href="#" class="btn btn-light" data-i18n="services.cta">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="services-btn-container">
+                <a href="#contact" class="btn btn-primary" data-i18n="services.knowmore">Know More About Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="testimonials.title">Student Testimonials</h2>
+                <p data-i18n="testimonials.subtitle">Hear what my students have to say about their learning experience</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text" data-i18n="testimonials.text1">Rajesh completely transformed my approach to mathematics. I went from struggling with algebra to acing my calculus class in just one semester. His teaching style is patient and incredibly effective.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Priya Sharma">
+                        </div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p data-i18n="testimonials.role1">Grade 11 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text" data-i18n="testimonials.text2">The science tutoring sessions were a game-changer for my son. Rajesh has a unique way of making complex concepts simple and interesting. His grades improved significantly and he now loves science!</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ravi Kumar">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ravi Kumar</h4>
+                            <p data-i18n="testimonials.role2">Parent of Grade 9 Student</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text" data-i18n="testimonials.text3">I was struggling with SAT preparation until I started working with Rajesh. His test-taking strategies and personalized approach helped me improve my score by 280 points! Highly recommended.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ananya Reddy">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ananya Reddy</h4>
+                            <p data-i18n="testimonials.role3">College Applicant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-btn-container">
+                <a href="#contact" class="btn btn-primary" data-i18n="testimonials.knowmore">Know More Success Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="contact.title">Get In Touch</h2>
+                <p data-i18n="contact.subtitle">Ready to start your learning journey? Contact me today!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-i18n="contact.info">Contact Information</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4 data-i18n="contact.location">Location</h4>
+                                <p data-i18n="contact.location_value">Online Worldwide</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p><a href="mailto:tutor@vidyaguru.com">tutor@vidyaguru.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4 data-i18n="contact.phone">Phone</h4>
+                                <p><a href="tel:+11234567890">+1 (123) 456-7890</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 data-i18n="contact.availability">Availability</h3>
+                    <p data-i18n="contact.weekdays">Monday - Friday: 9:00 AM - 8:00 PM</p>
+                    <p data-i18n="contact.saturday">Saturday: 10:00 AM - 4:00 PM</p>
+                    <p data-i18n="contact.sunday">Sunday: Closed</p>
+                    
+                    <div class="contact-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>VidyaGuru</h3>
+                    <p data-i18n="footer.description">Professional online tutoring services designed to help students achieve academic excellence and build confidence in their learning journey.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.quick_links">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                        <li><a href="#about" data-i18n="nav.about">About</a></li>
+                        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                        <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonials</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.subjects">Subjects</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-i18n="services.motivational.title">Motivational Classes</a></li>
+                        <li><a href="#" data-i18n="services.english.title">Spoken English</a></li>
+                        <li><a href="#" data-i18n="services.html.title">HTML & CSS</a></li>
+                        <li><a href="#" data-i18n="services.interview.title">Interview Training</a></li>
+                        <li><a href="#" data-i18n="services.computer.title">Computer Skills</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footer.newsletter">Newsletter</h3>
+                    <p data-i18n="footer.subscribe">Subscribe to receive study tips and educational resources.</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" required data-i18n-placeholder="contact.email_placeholder">
+                        <button type="submit" class="btn btn-primary" data-i18n="footer.subscribe_button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 VidyaGuru. <span data-i18n="footer.rights">All rights reserved. Designed with ❤️ for better education.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            en: {
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.testimonials": "Testimonials",
+                "nav.contact": "Contact",
+                "hero.title": "Transform Your Learning Experience With Expert Online Tutoring",
+                "hero.subtitle": "Personalized 1-on-1 tutoring sessions designed to help you achieve academic excellence. Join students from around the world who have improved their grades and confidence.",
+                "hero.cta1": "Book a Free Session",
+                "hero.cta2": "Explore Subjects",
+                "about.title": "About Me",
+                "about.subtitle": "Learn about my teaching philosophy, qualifications, and experience",
+                "about.heading": "Professional Tutor with 8+ Years Experience",
+                "about.text1": "Hello! I'm Rajesh Kumar, a passionate educator with a Master's degree in Education and extensive experience in online teaching. I specialize in making complex concepts simple and enjoyable to learn.",
+                "about.text2": "My teaching approach focuses on building strong foundational knowledge, developing critical thinking skills, and creating personalized learning plans for each student's unique needs and goals.",
+                "about.stat1": "Students Taught",
+                "about.stat2": "Satisfaction Rate",
+                "about.stat3": "Subjects Covered",
+                "about.cta": "Know More About Me",
+                "services.title": "Our Tutoring Services",
+                "services.subtitle": "Comprehensive learning solutions tailored to your academic needs",
+                "services.motivational.title": "Motivational Classes",
+                "services.motivational.desc": "Inspirational sessions to boost confidence, overcome challenges, and develop a growth mindset for academic and personal success.",
+                "services.english.title": "Spoken English",
+                "services.english.desc": "Improve pronunciation, fluency, and conversational skills through interactive sessions designed for real-world communication.",
+                "services.html.title": "HTML & CSS",
+                "services.html.desc": "Master the fundamentals of web development with hands-on projects and practical exercises to build beautiful, responsive websites.",
+                "services.interview.title": "Interview Training",
+                "services.interview.desc": "Prepare for job interviews with mock sessions, common questions, and strategies to showcase your skills and experience effectively.",
+                "services.computer.title": "Computer Skills",
+                "services.computer.desc": "Learn essential computer skills from basic operations to advanced software applications for personal and professional growth.",
+                "services.tech.title": "Tech Skills",
+                "services.tech.desc": "Develop in-demand technical skills including programming, data analysis, and digital literacy for the modern workplace.",
+                "services.cta": "Learn More",
+                "services.knowmore": "Know More About Our Services",
+                "testimonials.title": "Student Testimonials",
+                "testimonials.subtitle": "Hear what my students have to say about their learning experience",
+                "testimonials.text1": "Rajesh completely transformed my approach to mathematics. I went from struggling with algebra to acing my calculus class in just one semester. His teaching style is patient and incredibly effective.",
+                "testimonials.text2": "The science tutoring sessions were a game-changer for my son. Rajesh has a unique way of making complex concepts simple and interesting. His grades improved significantly and he now loves science!",
+                "testimonials.text3": "I was struggling with SAT preparation until I started working with Rajesh. His test-taking strategies and personalized approach helped me improve my score by 280 points! Highly recommended.",
+                "testimonials.role1": "Grade 11 Student",
+                "testimonials.role2": "Parent of Grade 9 Student",
+                "testimonials.role3": "College Applicant",
+                "testimonials.knowmore": "Know More Success Stories",
+                "contact.title": "Get In Touch",
+                "contact.subtitle": "Ready to start your learning journey? Contact me today!",
+                "contact.info": "Contact Information",
+                "contact.location": "Location",
+                "contact.location_value": "Online Worldwide",
+                "contact.phone": "Phone",
+                "contact.availability": "Availability",
+                "contact.weekdays": "Monday - Friday: 9:00 AM - 8:00 PM",
+                "contact.saturday": "Saturday: 10:00 AM - 4:00 PM",
+                "contact.sunday": "Sunday: Closed",
+                "contact.email_placeholder": "Your Email",
+                "footer.description": "Professional online tutoring services designed to help students achieve academic excellence and build confidence in their learning journey.",
+                "footer.quick_links": "Quick Links",
+                "footer.subjects": "Subjects",
+                "footer.newsletter": "Newsletter",
+                "footer.subscribe": "Subscribe to receive study tips and educational resources.",
+                "footer.subscribe_button": "Subscribe",
+                "footer.rights": "All rights reserved. Designed with ❤️ for better education."
+            },
+            te: {
+                "nav.home": "హోమ్",
+                "nav.about": "గురించి",
+                "nav.services": "సేవలు",
+                "nav.testimonials": "సాక్ష్యాలు",
+                "nav.contact": "సంప్రదించండి",
+                "hero.title": "నిపుణుల ఆన్లైన్ ట్యూటరింగ్‌తో మీ అభ్యసన అనుభవాన్ని మార్చండి",
+                "hero.subtitle": "వ్యక్తిగతీకరించిన 1-ఆన్-1 ట్యూటరింగ్ సెషన్‌లు మీరు విద్యాపరమైన శ్రేష్ఠతను సాధించడానికి సహాయపడతాయి. మీ గ్రేడ్‌లు మరియు విశ్వాసాన్ని మెరుగుపరచుకున్న ప్రపంచవ్యాప్తంగా విద్యార్థులతో చేరండి.",
+                "hero.cta1": "ఉచిత సెషన్ బుక్ చేయండి",
+                "hero.cta2": "విషయాలను అన్వేషించండి",
+                "about.title": "నా గురించి",
+                "about.subtitle": "నా బోధనా తత్వశాస్త్రం, అర్హతలు మరియు అనుభవం గురించి తెలుసుకోండి",
+                "about.heading": "8+ సంవత్సరాల అనుభవం కలిగిన ప్రొఫెషనల్ ట్యూటర్",
+                "about.text1": "హలో! నేను రాజేష్ కుమార్, విద్యలో మాస్టర్ డిగ్రీ కలిగి మరియు ఆన్‌లైన్ బోధనలో విస్తృత అనుభవం కలిగిన ఉత్సాహపూరిత విద్యావేత్త. సంక్లిష్ట భావనలను సరళమైన మరియు ఆనందదాయకంగా నేర్చుకోవడానికి నేను ప్రత్యేకత కలిగి ఉన్నాను.",
+                "about.text2": "నా బోధనా విధానం బలమైన మూలాధార జ్ఞానాన్ని నిర్మించడం, విమర్శనాత్మక ఆలోచనా నైపుణ్యాలను అభివృద్ధి చేయడం మరియు ప్రతి విద్యార్థి యొక్క ప్రత్యేక అవసరాలు మరియు లక్ష్యాల కోసం వ్యక్తిగతీకరించిన అభ్యాస ప్రణాళికలను రూపొందించడంపై దృష్టి పెడుతుంది.",
+                "about.stat1": "బోధించిన విద్యార్థులు",
+                "about.stat2": "సంతృప్తి రేటు",
+                "about.stat3": "కవర్ చేయబడిన విషయాలు",
+                "about.cta": "నా గురించి మరింత తెలుసుకోండి",
+                "services.title": "మా ట్యూటరింగ్ సేవలు",
+                "services.subtitle": "మీ విద్యాపరమైన అవసరాలకు అనుగుణంగా సమగ్ర అభ్యాస పరిష్కారాలు",
+                "services.motivational.title": "మోటివేషనల్ క్లాసెస్",
+                "services.motivational.desc": "విద్యాపరమైన మరియు వ్యక్తిగత విజయం కోసం ఆత్మవిశ్వాసాన్ని పెంచడానికి, సవాళ్లను అధిగమించడానికి మరియు వృద్ధి మనస్తత్వాన్ని అభివృద్ధి చేయడానికి స్ఫూర్తినిచ్చే సెషన్లు.",
+                "services.english.title": "స్పోకెన్ ఇంగ్లీష్",
+                "services.english.desc": "వాస్తవ ప్రపంచ కమ్యూనికేషన్ కోసం రూపొందించిన ఇంటరాక్టివ్ సెషన్ల ద్వారా ఉచ్ఛారణ, సరళత మరియు సంభాషణా నైపుణ్యాలను మెరుగుపరచండి.",
+                "services.html.title": "HTML & CSS",
+                "services.html.desc": "అందమైన, రెస్పాన్సివ్ వెబ్‌సైట్‌లను నిర్మించడానికి ప్రాక్టికల్ వ్యాయామాలు మరియు ప్రాక్టికల్ వ్యాయామాలతో వెబ్ అభివృద్ధి యొక్క ప్రాథమికాంశాలను నేర్చుకోండి.",
+                "services.interview.title": "ఇంటర్వ్యూ శిక్షణ",
+                "services.interview.desc": "మాక్ సెషన్లు, సాధారణ ప్రశ్నలు మరియు మీ నైపుణ్యాలు మరియు అనుభవాన్ని సమర్థవంతంగా ప్రదర్శించడానికి వ్యూహాలతో జాబ్ ఇంటర్వ్యూల కోసం సిద్ధం చేయండి.",
+                "services.computer.title": "కంప్యూటర్ నైపుణ్యాలు",
+                "services.computer.desc": "వ్యక్తిగత మరియు వృత్తిపరమైన వృద్ధి కోసం ప్రాథమిక కార్యకలాపాల నుండి అధునాతన సాఫ్ట్‌వేర్ అనువర్తనాల వరకు అవసరమైన కంప్యూటర్ నైపుణ్యాలను నేర్చుకోండి.",
+                "services.tech.title": "టెక్ నైపుణ్యాలు",
+                "services.tech.desc": "ఆధునిక కార్యాలయం కోసం ప్రోగ్రామింగ్, డేటా విశ్లేషణ మరియు డిజిటల్ అక్షరాస్యతతో సహా డిమాండ్ టెక్నికల్ నైపుణ్యాలను అభివృద్ధి చేయండి.",
+                "services.cta": "ఇంకా తెలుసుకోండి",
+                "services.knowmore": "మా సేవల గురించి మరింత తెలుసుకోండి",
+                "testimonials.title": "విద్యార్థుల సాక్ష్యాలు",
+                "testimonials.subtitle": "వారి అభ్యసన అనుభవం గురించి నా విద్యార్థులు ఏమి చెబుతున్నారో వినండి",
+                "testimonials.text1": "రాజేష్ నా గణిత విధానాన్ని పూర్తిగా మార్చేశారు. నేను బీజగణితంతో కష్టపడుతున్నప్పుడు కాలిక్యులస్ తరగతిలో ఒకే సెమిస్టర్‌లో టాప్ చేశాను. అతని బోధనా శైలి ఓపికతో మరియు చాలా ప్రభావవంతంగా ఉంటుంది.",
+                "testimonials.text2": "సైన్స్ ట్యూటరింగ్ సెషన్‌లు నా కొడుకు కోసం గేమ్-చేంజర్‌గా నిలిచాయి. రాజేష్ సంక్లిష్ట భావనలను సరళమైన మరియు ఆసక్తికరంగా చేసే ప్రత్యేక మార్గాన్ని కలిగి ఉన్నారు. అతని గ్రేడ్‌లు గణనీయంగా మెరుగుపడ్డాయి మరియు అతను ఇప్పుడు సైన్స్‌ను ఇష్టపడతాడు!",
+                "testimonials.text3": "నేను రాజేష్‌తో పని చేయడం ప్రారంభించే వరకు SAT సిద్ధతతో కష్టపడుతున్నాను. అతని టెస్ట్-టేకింగ్ వ్యూహాలు మరియు వ్యక్తిగతీకరించిన విధానం నా స్కోరును 280 పాయింట్లు మెరుగుపరచడంలో సహాయపడ్డాయి! అత్యంత సిఫారసు చేయబడింది.",
+                "testimonials.role1": "11వ తరగతి విద్యార్థి",
+                "testimonials.role2": "9వ తరగతి విద్యార్థి తల్లిదండ్రులు",
+                "testimonials.role3": "కళాశాల దరఖాస్తుదారు",
+                "testimonials.knowmore": "మరిన్ని విజయ కథనాలను తెలుసుకోండి",
+                "contact.title": "సంప్రదించండి",
+                "contact.subtitle": "మీ అభ్యాస ప్రయాణాన్ని ప్రారంభించడానికి సిద్ధంగా ఉన్నారా? ఈ రోజే నన్ను సంప్రదించండి!",
+                "contact.info": "సంప్రదింపు సమాచారం",
+                "contact.location": "స్థానం",
+                "contact.location_value": "ప్రపంచవ్యాప్తంగా ఆన్‌లైన్‌లో",
+                "contact.phone": "ఫోన్",
+                "contact.availability": "అందుబాటు",
+                "contact.weekdays": "సోమవారం - శుక్రవారం: ఉదయం 9:00 - రాత్రి 8:00",
+                "contact.saturday": "శనివారం: ఉదయం 10:00 - మధ్యాహ్నం 4:00",
+                "contact.sunday": "ఆదివారం: మూసివేయబడింది",
+                "contact.email_placeholder": "మీ ఇమెయిల్",
+                "footer.description": "విద్యార్థులు విద్యాపరమైన శ్రేష్ఠతను సాధించడానికి మరియు వారి అభ్యాస ప్రయాణంలో విశ్వాసాన్ని నిర్మించడానికి రూపొందించిన ప్రొఫెషనల్ ఆన్‌లైన్ ట్యూటరింగ్ సేవలు.",
+                "footer.quick_links": "త్వరిత లింకులు",
+                "footer.subjects": "విషయాలు",
+                "footer.newsletter": "వార్తాలేఖ",
+                "footer.subscribe": "స్టడీ టిప్స్ మరియు విద్యా వనరులను స్వీకరించడానికి సభ్యత్వాన్ని పొందండి.",
+                "footer.subscribe_button": "చందా",
+                "footer.rights": "అన్ని హక్కులు ప్రత్యేకించబడ్డాయి. మెరుగైన విద్య కోసం ❤️తో రూపొందించబడింది."
+            }
+        };
+
+        // Language toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const langToggles = document.querySelectorAll('.language-toggle');
+            let currentLang = 'en';
+            
+            // Set initial language
+            updateLanguage(currentLang);
+            
+            // Language toggle event
+            langToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('language-option')) {
+                        const selectedLang = e.target.dataset.lang;
+                        if (selectedLang !== currentLang) {
+                            // Update all toggles
+                            langToggles.forEach(t => {
+                                t.classList.remove('en-active', 'te-active');
+                                t.classList.add(selectedLang === 'en' ? 'en-active' : 'te-active');
+                                
+                                // Update active classes
+                                t.querySelectorAll('.language-option').forEach(option => {
+                                    option.classList.toggle('active', option.dataset.lang === selectedLang);
+                                });
+                            });
+                            
+                            currentLang = selectedLang;
+                            updateLanguage(currentLang);
+                        }
+                    }
+                });
+            });
+            
+            // Update page content based on language
+            function updateLanguage(lang) {
+                // Update all elements with data-i18n attribute
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.dataset.i18n;
+                    if (translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                    }
+                });
+                
+                // Update all placeholder texts
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                    const key = element.dataset.i18nPlaceholder;
+                    if (translations[lang][key]) {
+                        element.placeholder = translations[lang][key];
+                    }
+                });
+            }
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Newsletter form handling
+            const newsletterForm = document.querySelector('.footer-col form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert(currentLang === 'en' ? 
+                        'Thank you for subscribing to our newsletter!' : 
+                        'మా వార్తాలేఖకు చందాదారులుగా ధన్యవాదాలు!');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
